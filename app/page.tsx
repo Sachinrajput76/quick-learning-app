@@ -1,6 +1,4 @@
 // app/page.tsx
-import Header from './component/headers';
-import Footer from './component/footer';
 import Link from 'next/link';
 
 const LandingPage = () => {
