@@ -6,7 +6,7 @@
   "scripts": {
     "clean": "rimraf node_modules package-lock.json && npm install",
     "generate": "graphql-codegen --config codegen.yml",
-    "dev": "node server.js",
+    "dev": "next dev",
     "dev:turbopack": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
