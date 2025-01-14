@@ -2,7 +2,7 @@
   "name": "my-nextjs-project",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://sachinrajput76.github.io/quick-learning-app",
+  "homepage": "https://sachinrajput76.github.io/quick-learning-app/",
   "scripts": {
     "generate": "graphql-codegen --config codegen.yml",
     "dev": "next dev --turbopack",
