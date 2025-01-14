@@ -2,7 +2,7 @@
   "name": "quick-learning-app",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://sachinrajput76.github.io/quick-learning-app",
+  "homepage": "https://sachinrajput76.github.io",
   "scripts": {
     "clean": "rimraf node_modules package-lock.json && npm install",
     "generate": "graphql-codegen --config codegen.yml",
