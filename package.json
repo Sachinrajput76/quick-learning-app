@@ -6,7 +6,7 @@
   "scripts": {
     "clean": "rimraf node_modules package-lock.json && npm install",
     "generate": "graphql-codegen --config codegen.yml",
-    "dev": "next dev",
+    "dev": "node server.js",
     "dev:turbopack": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
@@ -17,9 +17,10 @@
   },
   "dependencies": {
     "@apollo/client": "^3.12.5",
+    "express": "^4.21.2",
     "graphql": "^16.10.0",
     "msw": "^2.7.0",
-    "next": "15.1.4",
+    "next": "^15.1.4",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "tree": "^0.1.3"
