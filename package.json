@@ -2,8 +2,9 @@
   "name": "quick-learning-app",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://sachinrajput76.github.io/quick-learning-app",
+  "homepage": "https://sachinrajput76.github.io",
   "scripts": {
+    "clean": "rimraf node_modules package-lock.json && npm install",
     "generate": "graphql-codegen --config codegen.yml",
     "dev": "next dev",
     "dev:turbopack": "next dev --turbopack",
@@ -32,11 +33,13 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "autoprefixer": "^10.4.20",
     "eslint": "^9",
     "eslint-config-next": "15.1.4",
     "gh-pages": "^6.3.0",
-    "postcss": "^8",
-    "tailwindcss": "^3.4.1",
+    "postcss": "^8.5.1",
+    "postcss-loader": "^8.1.1",
+    "tailwindcss": "^3.4.17",
     "typescript": "^5"
   }
 }
