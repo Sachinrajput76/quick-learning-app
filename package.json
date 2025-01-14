@@ -1,8 +1,8 @@
 {
-  "name": "quick_learning_app",
+  "name": "quick-learning-app",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://sachinrajput76.github.io/quick_learning_app",
+  "homepage": "https://sachinrajput76.github.io/quick-learning-app",
   "scripts": {
     "clean": "rimraf node_modules package-lock.json && npm install",
     "generate": "graphql-codegen --config codegen.yml",
@@ -39,7 +39,6 @@
     "gh-pages": "^6.3.0",
     "postcss": "^8.5.1",
     "postcss-loader": "^8.1.1",
-    "rimraf": "^6.0.1",
     "tailwindcss": "^3.4.1",
     "typescript": "^5"
   }
