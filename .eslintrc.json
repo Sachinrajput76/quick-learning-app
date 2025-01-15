@@ -1,0 +1,8 @@
+{
+  "extends": ["eslint:recommended", "plugin:react/recommended", "next/core-web-vitals"],
+  "plugins": ["react"],
+  "rules": {
+    "react/react-in-jsx-scope": "off",  // Disable the rule that requires React to be in scope
+    "react/jsx-runtime": "error"        // Enable the new JSX transform
+  }
+}

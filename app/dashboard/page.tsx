@@ -1,9 +1,10 @@
-"use client"
+"use client";
 // app/dashboard/page.tsx
+import React from "react";
 import { useState, useRef, useEffect } from "react";
 
 export default function Dashboard() {
-  const [sidebarWidth, setSidebarWidth] = useState(250); // Initial width of sidebar
+  const [sidebarWidth, setSidebarWidth] = useState(150); // Initial width of sidebar
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false); // State to check if sidebar is collapsed
   const isDragging = useRef(false);
   const initialX = useRef(0);
@@ -15,7 +16,7 @@ export default function Dashboard() {
     initialX.current = e.clientX;
     initialSidebarWidth.current = sidebarWidth;
     // Prevent text selection during drag
-    document.body.style.userSelect = 'none';
+    document.body.style.userSelect = "none";
   };
 
   // Handle resizing (dragging the resizer)
@@ -39,15 +40,12 @@ export default function Dashboard() {
   // Stop dragging
   const onMouseUp = () => {
     isDragging.current = false;
-    // Allow text selection after drag
-    document.body.style.userSelect = 'auto';
+    document.body.style.userSelect = "auto";
   };
 
-  // Stop dragging if the mouse leaves the screen
   const onMouseLeave = () => {
     isDragging.current = false;
-    // Allow text selection after drag
-    document.body.style.userSelect = 'auto';
+    document.body.style.userSelect = "auto";
   };
 
   // Attach the event listeners on mount and clean up on unmount
@@ -63,11 +61,13 @@ export default function Dashboard() {
     };
   }, []);
 
-  // Toggle sidebar open/close when the button is clicked
+  // Toggle sidebar visibility
   const toggleSidebar = () => {
     setIsSidebarCollapsed(!isSidebarCollapsed);
     if (!isSidebarCollapsed) {
-      setSidebarWidth(250); // Reset to the default width when reopening
+      setSidebarWidth(0); // Collapse the sidebar
+    } else {
+      setSidebarWidth(150); // Expand the sidebar
     }
   };
 
@@ -78,21 +78,41 @@ export default function Dashboard() {
         {!isSidebarCollapsed && (
           <div
             className="bg-gray-800 text-white p-4"
-            style={{ width: `${sidebarWidth}px` }} // Dynamically adjust sidebar width
+            style={{ width: `${sidebarWidth}px` }}
           >
             <h2 className="text-2xl font-bold mb-6">Dashboard</h2>
             <ul className="space-y-4">
               <li>
-                <a href="#" className="block text-gray-300 hover:text-white">Home</a>
+                <a
+                  href="#"
+                  className="block text-gray-300 hover:text-white"
+                >
+                  Home
+                </a>
               </li>
               <li>
-                <a href="#" className="block text-gray-300 hover:text-white">Profile</a>
+                <a
+                  href="#"
+                  className="block text-gray-300 hover:text-white"
+                >
+                  Profile
+                </a>
               </li>
               <li>
-                <a href="#" className="block text-gray-300 hover:text-white">Settings</a>
+                <a
+                  href="#"
+                  className="block text-gray-300 hover:text-white"
+                >
+                  Settings
+                </a>
               </li>
               <li>
-                <a href="#" className="block text-gray-300 hover:text-white">Logout</a>
+                <a
+                  href="#"
+                  className="block text-gray-300 hover:text-white"
+                >
+                  Logout
+                </a>
               </li>
             </ul>
           </div>
@@ -106,19 +126,16 @@ export default function Dashboard() {
           ></div>
         )}
 
-        {/* Button to open the sidebar */}
-        {isSidebarCollapsed && (
-          <div
-            className="bg-gray-800 text-white p-4 flex justify-center items-center cursor-pointer"
-            style={{ width: "50px" }} // Button width
-            onClick={toggleSidebar}
-          >
-            <span className="text-white">☰</span> {/* Icon for the button */}
-          </div>
-        )}
-
         {/* Main content */}
         <div className="flex-1 p-6 overflow-y-auto">
+          {/* Toggle Button */}
+          <button
+            onClick={toggleSidebar}
+            className="bg-blue-500 text-white px-4 py-2 rounded mb-4"
+          >
+            {isSidebarCollapsed ? "Show Sidebar" : "Hide Sidebar"}
+          </button>
+
           <h2 className="text-3xl font-bold mb-6">Welcome to your Dashboard</h2>
           <p className="text-lg">Here is an overview of your account activity.</p>
 

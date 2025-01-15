@@ -1,4 +1,5 @@
 // app/layout.tsx
+import React from 'react';
 import Footer from './component/footer';
 import Header from './component/headers';
 import './globals.css';
