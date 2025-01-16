@@ -8,6 +8,10 @@ const LandingPage = () => {
       {/* Landing Section */}
 
       <div className="py-20 container mx-auto text-center">
+        <div className="w-full flex items-center justify-center">
+          <img className="w-32" src="assets/banner-logo.png" alt="banner logo" />
+        </div>
+
         <h1 className="text-4xl font-bold mb-6">Welcome to Quick Learning App</h1>
         <p className="text-xl mb-6">Learn at your own pace with interactive tutorials and resources!</p>
         <Link href="/login" passHref>

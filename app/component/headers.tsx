@@ -31,7 +31,16 @@ export default function Header() {
   return (
     <header className="bg-blue-600 text-white p-4 shadow-md" role="banner">
       <div className="max-w-screen-xl mx-auto flex justify-between items-center">
-        <h1 className="text-2xl font-bold">My App</h1>
+        <h1 className="text-2xl font-bold flex items-center">
+          <img
+            src="assets/logo3.jpeg"
+            alt="Quick Learning Logo"
+            className="w-12 h-12 mr-3" // Adjusted size of logo and margin
+          />
+          My App
+        </h1>
+
+
 
         {/* Mobile hamburger icon */}
         <div className="lg:hidden">
