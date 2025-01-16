@@ -20,7 +20,7 @@ export default function Login() {
 
   return (
     <>
-      <div className="py-20 bg-gray-100 flex items-center justify-center">
+      <div className="md:py-20 sm:pb-10 bg-gray-100 flex items-center justify-center">
         <div className="w-full max-w-md bg-white p-6 rounded-lg shadow-lg">
           <h2 className="text-2xl font-bold text-center mb-6">Login</h2>
           <form onSubmit={handleSubmit} className="space-y-4">

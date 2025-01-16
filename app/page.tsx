@@ -7,7 +7,7 @@ const LandingPage = () => {
     <>
       {/* Landing Section */}
 
-      <div className="py-20 container mx-auto text-center">
+      <div className="md:py-20 container mx-auto text-center">
         <div className="w-full flex items-center justify-center">
           <img className="w-32" src="assets/banner-logo.png" alt="banner logo" />
         </div>
