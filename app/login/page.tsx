@@ -1,4 +1,5 @@
 "use client"
+import React from 'react';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
@@ -13,7 +14,7 @@ export default function Login() {
     if (email === 'admin@myapp.com' && password === 'password') {
       router.push('/dashboard');
     } else {
-      setError('Invalid email or password');
+      setError('Invalid email or password ');
     }
   };
 
