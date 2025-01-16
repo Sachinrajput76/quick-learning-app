@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import Link from "next/link";
 import { FaBars, FaTimes } from "react-icons/fa";
-import { usePathname } from "next/navigation";
+// import { usePathname } from "next/navigation";
 
 interface HeaderProps {
   isMenuOpenProp?: boolean;
@@ -11,7 +11,7 @@ interface HeaderProps {
 function Header({ isMenuOpenProp, onMenuClose }: HeaderProps) {
   const [isMenuOpen, setIsMenuOpen] = React.useState<boolean>(false);
   const menuRef = useRef<HTMLDivElement | null>(null);
-  const pathname = usePathname();
+  // const pathname = usePathname();
 
   // Sync local state with isMenuOpenProp from the parent layout
   useEffect(() => {

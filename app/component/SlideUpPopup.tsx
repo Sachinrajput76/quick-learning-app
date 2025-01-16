@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 
 type SlideUpPopupProps = {
   isOpen: boolean;
@@ -16,9 +16,8 @@ const SlideUpPopup: React.FC<SlideUpPopupProps> = ({ isOpen, onClose, children }
         onClick={onClose}
       />
       <div
-        className={`fixed bottom-0 left-0 right-0 bg-white shadow-lg p-4 transition-transform transform ${
-          isOpen ? "translate-y-0" : "translate-y-full"
-        }`}
+        className={`fixed bottom-0 left-0 right-0 bg-white shadow-lg p-4 transition-transform transform ${isOpen ? "translate-y-0" : "translate-y-full"
+          }`}
       >
         <button onClick={onClose} className="absolute top-2 right-2 text-gray-500">
           X
