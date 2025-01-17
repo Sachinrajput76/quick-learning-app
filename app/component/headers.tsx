@@ -25,7 +25,6 @@ function Header({ isMenuOpenProp, onMenuClose }: HeaderProps) {
 
   }
 
-
   // Handle clicking outside of the menu to close it
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
