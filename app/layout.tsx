@@ -9,6 +9,8 @@ import { usePathname } from "next/navigation"; // Correct import for the App Rou
 import SlideUpPopup from "./component/SlideUpPopup"; // Import the SlideUpPopup component
 import Head from "next/head";
 import SwipeHandler from "./component/SwipeHandler";
+import { ApolloProvider } from '@apollo/client';
+import client from './graphql/apolloClient';
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -66,67 +68,69 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       </Head>
       <body className="h-full">
         <ReduxProvider>
-          <SwipeHandler
-            onSwipeLeft={() => setIsMenuOpen(true)} // Open menu on swipe left
-            onSwipeRight={handleMenuClose} // Close menu on swipe right
-          >
-            <div className="bg-gray-100 flex flex-col h-full">
-              {/* Header with isMenuOpen and onMenuClose props */}
-              <Header isMenuOpenProp={isMenuOpen} onMenuClose={handleMenuClose} />
+          <ApolloProvider client={client}>
+            <SwipeHandler
+              onSwipeLeft={() => setIsMenuOpen(true)} // Open menu on swipe left
+              onSwipeRight={handleMenuClose} // Close menu on swipe right
+            >
+              <div className="bg-gray-100 flex flex-col h-full">
+                {/* Header with isMenuOpen and onMenuClose props */}
+                <Header isMenuOpenProp={isMenuOpen} onMenuClose={handleMenuClose} />
 
-              {/* Main content area with conditional styling */}
-              <main
-                className={`${['landing', 'login', 'dashboard'].includes(currentPage)
-                  ? 'h-[calc(100vh-136px)]'
-                  : ''
-                  } flex-grow overflow-y-auto`}
-              >
-                {children}
-              </main>
+                {/* Main content area with conditional styling */}
+                <main
+                  className={`${['landing', 'login', 'dashboard'].includes(currentPage)
+                    ? 'h-[calc(100vh-136px)]'
+                    : ''
+                    } flex-grow overflow-y-auto`}
+                >
+                  {children}
+                </main>
 
-              {/* Footer */}
-              <Footer />
+                {/* Footer */}
+                <Footer />
 
-              {/* Slide-up popup for filters */}
-              <SlideUpPopup isOpen={isPopupOpen} onClose={togglePopup}>
-                {/* Filter Content Here */}
-                <h2 className="text-lg font-bold">Filter Options</h2>
-                <div className="space-y-4">
-                  <div>
-                    <label htmlFor="category" className="block">
-                      Category
-                    </label>
-                    <select id="category" className="p-2 border rounded">
-                      <option value="">Select Category</option>
-                      <option value="tech">Technology</option>
-                      <option value="edu">Education</option>
-                    </select>
+                {/* Slide-up popup for filters */}
+                <SlideUpPopup isOpen={isPopupOpen} onClose={togglePopup}>
+                  {/* Filter Content Here */}
+                  <h2 className="text-lg font-bold">Filter Options</h2>
+                  <div className="space-y-4">
+                    <div>
+                      <label htmlFor="category" className="block">
+                        Category
+                      </label>
+                      <select id="category" className="p-2 border rounded">
+                        <option value="">Select Category</option>
+                        <option value="tech">Technology</option>
+                        <option value="edu">Education</option>
+                      </select>
+                    </div>
+                    <div>
+                      <label htmlFor="price" className="block">
+                        Price Range
+                      </label>
+                      <input
+                        type="range"
+                        id="price"
+                        min="0"
+                        max="1000"
+                        step="10"
+                        className="w-full"
+                      />
+                    </div>
                   </div>
-                  <div>
-                    <label htmlFor="price" className="block">
-                      Price Range
-                    </label>
-                    <input
-                      type="range"
-                      id="price"
-                      min="0"
-                      max="1000"
-                      step="10"
-                      className="w-full"
-                    />
-                  </div>
-                </div>
-              </SlideUpPopup>
+                </SlideUpPopup>
 
-              {/* Trigger button to open the popup */}
-              {/* <button
+                {/* Trigger button to open the popup */}
+                {/* <button
                 onClick={togglePopup}
                 className="fixed bottom-4 right-4 bg-blue-500 text-white p-3 rounded-full"
               >
                 Open Filters
               </button> */}
-            </div>
-          </SwipeHandler>
+              </div>
+            </SwipeHandler>
+          </ApolloProvider>
         </ReduxProvider>
       </body>
     </html>

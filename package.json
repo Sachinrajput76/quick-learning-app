@@ -18,12 +18,12 @@
     "prepare": "husky"
   },
   "dependencies": {
-    "@apollo/client": "^3.12.5",
+    "@apollo/client": "^3.12.6",
     "@hookform/resolvers": "^3.10.0",
     "@reduxjs/toolkit": "^2.5.0",
     "express": "^4.21.2",
     "graphql": "^16.10.0",
-    "msw": "^2.7.0",
+    "graphql-request": "^7.1.2",
     "next": "^15.1.4",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",

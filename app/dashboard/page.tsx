@@ -1,17 +1,21 @@
+// app/component/dashboard/Dashboard.tsx
 "use client";
-// app/dashboard/page.tsx
-import React from "react";
-import { useState, useRef, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import { TbArrowBarLeft, TbArrowBarToRight } from "react-icons/tb";
+import { GET_COUNTRIES } from "../graphql/queries";
+import { ApolloProvider, useQuery, gql } from '@apollo/client';
 
+// Dashboard Component
 export default function Dashboard() {
-  const [sidebarWidth, setSidebarWidth] = useState(150); // Default sidebar width
-  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false); // Collapse state
+  const [sidebarWidth, setSidebarWidth] = useState(150);
+  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
   const isDragging = useRef(false);
   const initialX = useRef(0);
   const initialSidebarWidth = useRef(0);
 
-  // Handle mouse down event on the resizer
+  // Use the useQuery hook to fetch the mocked GraphQL data
+  const { data, loading, error } = useQuery(GET_COUNTRIES);
+
   const handleMouseDown = (e: React.MouseEvent) => {
     isDragging.current = true;
     initialX.current = e.clientX;
@@ -19,14 +23,12 @@ export default function Dashboard() {
     document.body.style.userSelect = "none"; // Prevent text selection
   };
 
-  // Handle mouse movement during drag
   const handleMouseMove = (e: MouseEvent) => {
     if (!isDragging.current) return;
 
     const dx = e.clientX - initialX.current;
     let newWidth = initialSidebarWidth.current + dx;
 
-    // Collapse sidebar if width is too small
     if (newWidth < 100) {
       setIsSidebarCollapsed(true);
       newWidth = 0;
@@ -37,15 +39,14 @@ export default function Dashboard() {
     setSidebarWidth(newWidth);
   };
 
-  // Stop dragging on mouse up
   const handleMouseUp = () => {
     if (isDragging.current) {
       isDragging.current = false;
-      document.body.style.userSelect = "auto"; // Re-enable text selection
+      document.body.style.userSelect = "auto";
     }
   };
 
-  useEffect(() => {
+  React.useEffect(() => {
     document.addEventListener("mousemove", handleMouseMove);
     document.addEventListener("mouseup", handleMouseUp);
 
@@ -55,10 +56,9 @@ export default function Dashboard() {
     };
   }, []);
 
-  // Toggle sidebar open/close
   const toggleSidebar = () => {
     if (isSidebarCollapsed) {
-      setSidebarWidth(150); // Reset to default width
+      setSidebarWidth(150);
     }
     setIsSidebarCollapsed(!isSidebarCollapsed);
   };
@@ -107,7 +107,6 @@ export default function Dashboard() {
 
       {/* Main Content */}
       <div className="flex-1 p-6 overflow-y-auto">
-
         {/* Sidebar toggle button */}
         <button
           onClick={toggleSidebar}
@@ -117,23 +116,24 @@ export default function Dashboard() {
         </button>
 
         <h2 className="text-3xl font-bold mb-6">Welcome to your Dashboard</h2>
-        <p className="text-lg">Here is an overview of your account activity.</p>
+        <p className="text-lg">Here is an overview of countries</p>
 
         {/* Dashboard Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mt-6">
-          <div className="bg-white p-6 rounded-lg shadow-lg">
-            <h3 className="text-xl font-semibold mb-4">Total Sales</h3>
-            <p className="text-3xl font-bold text-blue-600">$20,000</p>
+        {loading ? (
+          <p>Loading...</p>
+        ) : error ? (
+          <p className="text-red-500">Error: {error.message}</p>
+        ) : (
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mt-6">
+            {data?.countries?.map((country: { code: string, name: string, capital: string }) => (
+              <div key={country.code} className="bg-white p-6 rounded-lg shadow-lg">
+                <h3 className="text-xl font-semibold mb-4">{country.name}</h3>
+                <p className="text-lg font-bold text-green-600">Capital: {country.capital}</p>
+                <p className="text-lg font-bold text-yellow-600">Code: {country.code}</p>
+              </div>
+            ))}
           </div>
-          <div className="bg-white p-6 rounded-lg shadow-lg">
-            <h3 className="text-xl font-semibold mb-4">New Orders</h3>
-            <p className="text-3xl font-bold text-green-600">120</p>
-          </div>
-          <div className="bg-white p-6 rounded-lg shadow-lg">
-            <h3 className="text-xl font-semibold mb-4">Total Users</h3>
-            <p className="text-3xl font-bold text-yellow-600">1,500</p>
-          </div>
-        </div>
+        )}
       </div>
     </div>
   );
