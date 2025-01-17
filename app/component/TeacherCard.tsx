@@ -2,7 +2,7 @@
 import React from 'react';
 
 interface TeacherCardProps {
-  id: string;
+  // id: string;
   name: string;
   experience: number;
   totalMinutesTaught: number;
@@ -10,7 +10,7 @@ interface TeacherCardProps {
 }
 
 const TeacherCard: React.FC<TeacherCardProps> = ({
-  id,
+  // id,
   name,
   experience,
   totalMinutesTaught,
