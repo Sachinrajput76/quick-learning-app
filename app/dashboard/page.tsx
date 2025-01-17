@@ -2,6 +2,7 @@
 // app/dashboard/page.tsx
 import React from "react";
 import { useState, useRef, useEffect } from "react";
+import { TbArrowBarLeft, TbArrowBarToRight } from "react-icons/tb";
 
 export default function Dashboard() {
   const [sidebarWidth, setSidebarWidth] = useState(150); // Default sidebar width
@@ -112,7 +113,7 @@ export default function Dashboard() {
           onClick={toggleSidebar}
           className="bg-blue-500 text-white px-4 py-2 rounded mb-4"
         >
-          {isSidebarCollapsed ? ">" : "<"}
+          {isSidebarCollapsed ? <TbArrowBarToRight /> : <TbArrowBarLeft />}
         </button>
 
         <h2 className="text-3xl font-bold mb-6">Welcome to your Dashboard</h2>
