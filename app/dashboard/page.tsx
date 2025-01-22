@@ -93,7 +93,7 @@ export default function Dashboard() {
   const handleTeacherConnect = () => {
     window.open(
       '/video-call', // URL to the VideoCallPage
-      '_self', // Opens in a new tab
+      '_blank', // Opens in a new tab
     );
   };
 
