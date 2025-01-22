@@ -9,6 +9,7 @@ import {
   //  GET_COUNTRIES, 
   GET_TEACHERS
 } from "../graphql/queries"; // Add GET_TEACHERS query
+import nextConfig from '@/next.config';
 
 interface Teacher {
   id: string;
@@ -92,7 +93,7 @@ export default function Dashboard() {
   };
   const handleTeacherConnect = () => {
     window.open(
-      '/video-call', // URL to the VideoCallPage
+      `${nextConfig.basePath + '/video-call'}`, // URL to the VideoCallPage
       '_blank', // Opens in a new tab
     );
   };
