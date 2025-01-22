@@ -1,0 +1,1 @@
+-e "#!/bin/sh\n. \"$(dirname \"$0\")/_/husky.sh\"\n\nnpm run lint" 

@@ -15,7 +15,7 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d out",
     "test": "echo \"No tests specified\"",
-    "prepare": "husky"
+    "prepare": "husky install"
   },
   "eslintConfig": {
     "settings": {
