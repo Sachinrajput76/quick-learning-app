@@ -10,7 +10,7 @@ import SlideUpPopup from "./component/SlideUpPopup"; // Import the SlideUpPopup 
 import Head from "next/head";
 import SwipeHandler from "./component/SwipeHandler";
 import { ApolloProvider } from '@apollo/client';
-import client from './graphql/apolloClient';
+import { client } from './graphql/apolloClient';
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -20,23 +20,12 @@ export default function RootLayout({ children }: { children: ReactNode }) {
 
   // Update the currentPage state based on the pathname
   useEffect(() => {
-    switch (pathname) {
-      case "/":
-        setCurrentPage("landing");
-        break;
-      case "/login":
-        setCurrentPage("login");
-        break;
-      case "/register":
-        setCurrentPage("register");
-        break;
-      case "/dashboard":
-        setCurrentPage("dashboard");
-        break;
-      default:
-        setCurrentPage("other");
-        break;
-    }
+    // Extract page name directly from the pathname
+    const page = pathname === "/" ? "landing" : pathname.substring(1);
+
+    // Set currentPage, defaulting to "other" if the page name is empty
+    setCurrentPage(page || "other");
+
   }, [pathname]);
 
   // Function to open and close the popup

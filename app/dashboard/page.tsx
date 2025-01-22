@@ -1,20 +1,37 @@
 // app/dashboard/Dashboard.tsx
 'use client'
 import { useQuery } from '@apollo/client';
-import React, { useState, useRef } from "react";
+import React, { useRef, useState } from "react";
 import { TbArrowBarLeft, TbArrowBarToRight } from "react-icons/tb";
+import Popup from '../component/Popup'; // Assuming the Popup component is in the same folder
+import TeacherCard from '../component/TeacherCard'; // Assuming the TeacherCard component is in the same folder
 import {
   //  GET_COUNTRIES, 
   GET_TEACHERS
 } from "../graphql/queries"; // Add GET_TEACHERS query
-import TeacherCard from '../component/TeacherCard'; // Assuming the TeacherCard component is in the same folder
-import Popup from '../component/Popup'; // Assuming the Popup component is in the same folder
+
+interface Teacher {
+  id: string;
+  name: string;
+  experience: number;
+  totalMinutesTaught: number;
+  subjects?: string[];
+  ratings?: number;
+  joinedDate?: string;
+}
+interface SelectedTeacher {
+  id: string;
+  name: string;
+  experience: number;
+  totalMinutesTaught: number;
+};
 
 // Dashboard Component
 export default function Dashboard() {
+
   const [sidebarWidth, setSidebarWidth] = useState(150);
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
-  const [selectedTeacher, setSelectedTeacher] = useState<null | { name: string, experience: number, totalMinutesTaught: number }>(null);
+  const [selectedTeacher, setSelectedTeacher] = useState<null | { id: string, name: string, experience: number, totalMinutesTaught: number }>(null);
   const isDragging = useRef(false);
   const initialX = useRef(0);
   const initialSidebarWidth = useRef(0);
@@ -70,14 +87,19 @@ export default function Dashboard() {
     setIsSidebarCollapsed(!isSidebarCollapsed);
   };
 
-  const handleTeacherClick = (teacher: { name: string, experience: number, totalMinutesTaught: number }) => {
+  const handleTeacherClick = (teacher: SelectedTeacher) => {
     setSelectedTeacher(teacher);
+  };
+  const handleTeacherConnect = () => {
+    window.open(
+      '/video-call', // URL to the VideoCallPage
+      '_self', // Opens in a new tab
+    );
   };
 
   const handleClosePopup = () => {
     setSelectedTeacher(null); // Close the popup when clicked
   };
-
   return (
     <div className="flex h-screen">
       {/* Sidebar */}
@@ -160,21 +182,19 @@ export default function Dashboard() {
           <p className="text-red-500">Error: {teachersError.message}</p>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mt-6">
-            {teachersData?.teachers?.map((teacher: { id: string, name: string, experience: number, totalMinutesTaught: number }) => (
+            {teachersData?.teachers?.map((teacher: Teacher) => (
               <TeacherCard
                 key={teacher.id}
+                id={teacher.id}
                 name={teacher.name}
                 experience={teacher.experience}
                 totalMinutesTaught={teacher.totalMinutesTaught}
-                onClick={() =>
-                  handleTeacherClick({
-                    name: teacher.name,
-                    experience: teacher.experience,
-                    totalMinutesTaught: teacher.totalMinutesTaught,
-                  })
-                }
+                onClick={() => handleTeacherClick(teacher)}
+                onConnect={() => handleTeacherConnect()}
               />
             ))}
+
+
           </div>
         )}
       </div>
@@ -183,6 +203,7 @@ export default function Dashboard() {
       {selectedTeacher && (
         <Popup teacher={selectedTeacher} onClose={handleClosePopup} />
       )}
+
     </div>
   );
 }

@@ -117,6 +117,11 @@ function Header({ isMenuOpenProp, onMenuClose }: HeaderProps) {
                 Dashboard
               </Link>
             </li>
+            <li>
+              <Link href="/help" onClick={handleLinkClick} className="hover:text-blue-300">
+                Help
+              </Link>
+            </li>
           </ul>
         </nav>
       </div>

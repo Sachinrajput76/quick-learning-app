@@ -1,20 +1,21 @@
-// app/component/TeacherCard.tsx
+// src/components/TeacherCard.tsx
 import React from 'react';
 
 interface TeacherCardProps {
-  // id: string;
+  id: string;
   name: string;
   experience: number;
   totalMinutesTaught: number;
   onClick: () => void;
+  onConnect: () => void;
 }
 
 const TeacherCard: React.FC<TeacherCardProps> = ({
-  // id,
   name,
   experience,
   totalMinutesTaught,
   onClick,
+  onConnect
 }) => (
   <div
     className="bg-white p-6 rounded-lg shadow-lg cursor-pointer"
@@ -25,8 +26,8 @@ const TeacherCard: React.FC<TeacherCardProps> = ({
     <p className="text-gray-700">Total Minutes Taught: {totalMinutesTaught}</p>
     <button
       onClick={(e) => {
-        e.stopPropagation(); // Prevents triggering the onClick of the card
-        // Implement connect functionality here
+        e.stopPropagation(); // Prevent triggering the onClick of the card
+        onConnect(); // Trigger the onClick function passed as a prop
       }}
       className="mt-4 bg-blue-500 text-white px-4 py-2 rounded"
     >

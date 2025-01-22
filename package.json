@@ -17,6 +17,13 @@
     "test": "echo \"No tests specified\"",
     "prepare": "husky"
   },
+  "eslintConfig": {
+    "settings": {
+      "react": {
+        "version": "detect"
+      }
+    }
+  },
   "dependencies": {
     "@apollo/client": "^3.12.6",
     "@hookform/resolvers": "^3.10.0",

@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useDispatch } from 'react-redux';
-import { registerUser } from '@/store/actions';
+import { registerUser } from '@/redux/actions/registerActions'
 
 const schema = z.object({
   name: z.string().min(1, 'Name is required'),
@@ -35,9 +35,10 @@ const RegisterForm = () => {
   });
 
   const onSubmit = (data: RegisterFormValues) => {
-    dispatch(registerUser(data));
+    const userData = { ...data, username: data.name }; // Example of setting username as the name
+    dispatch(registerUser(userData));
   };
-
+  
   return (
     <div className="container mx-auto">
       <form

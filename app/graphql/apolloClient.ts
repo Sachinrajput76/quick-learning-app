@@ -1,18 +1,12 @@
 // app/graphql/apolloClient.ts
 import { ApolloClient, InMemoryCache, ApolloLink, Observable } from '@apollo/client';
+import { teachersData } from '@/mocks/teachersMock';
 
 // Interface for Country and Teacher types
 interface Country {
   code: string;
   name: string;
   capital: string;
-}
-
-interface Teacher {
-  id: string;
-  name: string;
-  experience: number;
-  totalMinutesTaught: number;
 }
 
 // Toggle between mock data and actual API data
@@ -42,12 +36,8 @@ const mockLink = new ApolloLink((operation, forward) => {
       return new Observable((observer) => {
         observer.next({
           data: {
-            teachers: [
-              { id: '1', name: 'John Doe', experience: 10, totalMinutesTaught: 10000 },
-              { id: '2', name: 'Jane Smith', experience: 5, totalMinutesTaught: 5000 },
-              { id: '3', name: 'Alice Brown', experience: 7, totalMinutesTaught: 7000 },
-            ] as Teacher[],
-          },
+            teachers: teachersData.data.teachers, // Ensure it matches the query
+          }
         });
         observer.complete();
       });
@@ -71,4 +61,4 @@ const client = new ApolloClient({
   link: ApolloLink.from([mockLink]), // uncomment it for mock response
 });
 
-export default client;
+export { client };
